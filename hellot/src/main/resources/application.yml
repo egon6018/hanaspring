@@ -1,0 +1,4 @@
+spring:
+  profiles:
+    active: dev # 개발할때는 -> dev파일이 실행된다. (application-dev)
+            #server
