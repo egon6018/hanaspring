@@ -1,0 +1,3 @@
+spring:
+  profiles:
+    active: dev # dev파일을 실행시킬것이다

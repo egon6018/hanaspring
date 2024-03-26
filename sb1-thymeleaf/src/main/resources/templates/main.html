@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+	<!-- 127.0.0.1:8080/sb1/main.css -->
+	<link href="css/main.css" rel="stylesheet" />
+	<!--
+        그냥 /main.css(절대경로)라고 쓰면 root application에서 main.css를 찾는거기 때문에 css파일 적용이 안됨
+        하지만 그냥 main.css(상대경로)라고 하면 css파일 적용됨
+     -->
+	<style>
+	</style>
+</head>
+
+<body>
+<header>
+	<h1>Main Page</h1>
+	<ul>
+		<li><a th:href="@{/}">MAIN</a></li>
+		<li><a th:href="@{/login}">LOGIN</a></li>
+		<li><a th:href="@{/register}">REGISTER</a></li>
+		<li><a href="">CUST ADD</a></li>
+		<li><a href="">CUST GET</a></li>
+	</ul>	
+</header>
+<section th:include="${centerpage} ? ${centerpage} : center">
+
+</section>
+<footer></footer>
+</body>
+</html>
+
+
+
+
+
+
