@@ -7,7 +7,7 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 	<!-- 127.0.0.1:8080/sb1/ -->
-	<link href="<c:url value="/main.css"  />" rel="stylesheet">
+	<link href="<c:url value="/css/main.css"  />" rel="stylesheet">
 	<!--
         그냥 /main.css(절대경로)라고 쓰면 root application에서 main.css를 찾는거기 때문에 css파일 적용이 안됨
         하지만 그냥 main.css(상대경로)라고 하면 css파일 적용됨
@@ -27,6 +27,8 @@
 		<li><a href="<c:url value="/register" />">REGISTER</a></li>
 		<li><a href="<c:url value="/cust/add" />">CUST ADD</a></li>
 		<li><a href="<c:url value="/cust/get" />">CUST GET</a></li>
+		<li><a href="<c:url value="/item/add" />">ITEM ADD</a></li>
+		<li><a href="<c:url value="/item/get" />">ITEM GET</a></li>
 	</ul>	
 </header>
 <section>
