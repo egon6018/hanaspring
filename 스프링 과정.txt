@@ -1,0 +1,15 @@
+프로젝트 생성할때 패키지와 그룹명 항상 동일하게 (ex) com.hana
+만약 파일 자체를 외부에서 복사해서 붙여넣기 했으면 꼭 build탭 들어가서 rebuild하기!!
+
+1. build.gradle에 test lombok이랑 jsp관련 코드 추가하고 빌드(코끼리)
+
+1-2. settings들어가서 gradle에서 intelliJ로 바꿔주고, compiler들어가서 automatically체크해주고, auto-make키보드로 쳐서 체크, 그다음 utf 키보드로 쳐서 utf-8로 다 바꿔주고, 프로젝트명 옆에 점3개들어가서 tree appearance들어가서 compact middle packages체크해주기
+
+2. main속에 resources파일 찾아서 application.yml과 application-dev.yml 파일들 생성 properties파일은 삭제해도 되고, 삭제할때는 safe delete 체크 해제하기! 디렉토리에 남아있으니까
+파일 외부에서 복붙하고 났으면 rebuild하기
+
+3.  구현할 jsp파일들은 main에 new directory로 webapp만들고 views만들어서 그 안에 jsp파일들 생성하기
+static폴더는 한번 만들어서 보정하는 용도
+
+4. main->java->com->hana->controller속에 controller 클래스들 만들어서 관리
+
