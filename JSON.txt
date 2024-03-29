@@ -1,1 +1,6 @@
 JSON : Java Script Object Notation
+
+AJAX : Asynchronous
+
+sb2에서 ajax3: 실시간 검색 순위
+ - 주기적으로 (ex. 5초) 

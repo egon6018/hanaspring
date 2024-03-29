@@ -10,6 +10,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="container">
-    <h2>AJAX3 Page</h2>
+    <h2>CHART3 Page</h2>
 
 </div>

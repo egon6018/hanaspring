@@ -1,15 +1,67 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: goeun
-  Date: 2024-03-27
-  Time: 오전 9:37
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="container">
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+
+<style>
+    #geo2 > #map{
+        width:500px;
+        height: 400px;
+        border:2px solid red;
+    }
+</style>
+<script>
+    let geo2 = {
+        map:null,
+        // initialize
+        init:function(){
+            this.mapdisplay();
+            $('#btn_s').click(() => {
+                this.go(37.5447611,127.0564625);
+            });
+            $('#btn_b').click(() => {
+                this.go(35.1290483,129.0446982);
+            });
+            $('#btn_j').click(() => {
+                this.go(33.3846216,126.5534925);
+            });
+        },
+        // map 객체 생성
+        mapdisplay:function(){
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                mapOption = {
+                    center: new kakao.maps.LatLng(37.5447611,127.0564625), // 지도의 중심좌표
+                    level: 8 // 지도의 확대 레벨
+                };
+            this.map = new kakao.maps.Map(mapContainer, mapOption);
+
+            var market_position = new kakao.maps.LatLng(37.5447611,127.0564625);
+            var marker = new kakao.maps.Marker({
+                position: market_position
+            });
+            marker.setMap(this.map);
+        },
+        // 이동
+        go:function(lat, lng){ // 지도 이동시키기
+            // 이동할 위도 경도 위치를 생성합니다
+            var moveLatLon = new kakao.maps.LatLng(lat, lng);
+
+            // 지도 중심을 부드럽게 이동시킵니다
+            // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+            this.map.panTo(moveLatLon);
+        },
+        // 이동 하는 지역의 데이터를 가지고 온다.
+        // loc(s, b, j)
+        getgeodata:function(loc){},
+        display:function(datas){}
+    };
+    $(function(){
+        geo2.init();
+    });
+</script>
+<div class="container" id="geo2">
     <h2>GEO2 Page</h2>
-    <h5>Title description, Sep 2, 2017</h5>
-    <div class="fakeimg">Fake Image</div>
-    <p>Some text..</p>
-    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    <button id="btn_s" type="button" class="btn btn-primary">Seoul</button>
+    <button id="btn_b" type="button" class="btn btn-primary">Busan</button>
+    <button id="btn_j" type="button" class="btn btn-primary">Jeju</button>
+
+    <div id="map"></div>
 </div>
