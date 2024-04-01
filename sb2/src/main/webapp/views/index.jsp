@@ -26,6 +26,14 @@
 <%--    <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=011f6fe99444e793d9d566a663cd9851&autoload=false"></script>--%>
         <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=011f6fe99444e793d9d566a663cd9851"></script>
 
+    <%-- HighChart API --%>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
     <script src="<c:url value="/js/0327.js" />"></script>
     <style>
         .fakeimg {

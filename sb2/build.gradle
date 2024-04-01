@@ -30,6 +30,9 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	// JSON
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
 	// tomcat & JSP
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'jakarta.servlet:jakarta.servlet-api'

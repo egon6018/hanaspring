@@ -14,5 +14,6 @@ logging:
     root: info
 app:
   dir:
-    imgdir: file:///C:\hanaspring\sb2\imgs
-    logdir: file:///C:\hanaspring\sb2\logs
+    imgdir: /root/imgs/
+    logdir: /root/logs/
+#    리눅스 버전

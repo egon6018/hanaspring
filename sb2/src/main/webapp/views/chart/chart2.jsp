@@ -10,51 +10,74 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script>
-    let ajax2 = {
+    let chart2 = {
         init: function (){
-            $('#id').keyup(function (){
-                var id = $(this).val();
-                ajax2.send(id);
+            $('#get').click(()=>{
+                this.get();
             });
+            setInterval(this.get(), 3000);
         },
-        send:function (id){
+        get:function (){
             $.ajax({
-                url:'<c:url value="/checkid"/>',
-                data:{'id':id},
-                success:function (data){
-                    ajax2.display(data);
+                url:'<c:url value="/chart2" />',
+                success:(data)=>{
+                    this.chart(data);
                 }
             });
         },
-        display:function (data){
-            var result = 'Available.';
-            if(data.trim() == '0'){
-                result = 'Not Available.';
-            }
-            $('#id_span').text(result);
+        chart:function (data){
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text: 'Monthly Average Temperature'
+                },
+                subtitle: {
+                    text: 'Source: ' +
+                        '<a href="https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature" ' +
+                        'target="_blank">Wikipedia.com</a>'
+                },
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    accessibility: {
+                        description: 'Months of the year'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Temperature'
+                    },
+                    labels: {
+                        format: '{value}°'
+                    }
+                },
+                tooltip: {
+                    crosshairs: true,
+                    shared: true
+                },
+                plotOptions: {
+                    spline: {
+                        marker: {
+                            radius: 4,
+                            lineColor: '#666666',
+                            lineWidth: 1
+                        }
+                    }
+                },
+                series: data
+            });
         }
     };
-
     $(function(){
-        ajax2.init();
+        chart2.init();
     });
 </script>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <div class="container">
     <h2>CHART2 Page</h2>
-    <form id="login_form">
-        <div class="form-group">
-            <label for="id">ID:</label>
-            <input type="text" class="form-control" id="id" placeholder="Enter id" name="id">
-            <span id="id_span"></span>
-        </div>
-        <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-
-        </div>
-
-        <button type="button" class="btn btn-primary">LOGIN</button>
-    </form>
+    <button id="get" type="button" class="btn btn-primary">GET</button>
+    <div id="container"></div>
 </div>
