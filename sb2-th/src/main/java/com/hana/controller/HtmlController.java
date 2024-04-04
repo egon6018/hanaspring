@@ -58,7 +58,7 @@ public class HtmlController {
 
         model.addAttribute("cust", c);
         model.addAttribute("left", dir+"left");
-        model.addAttribute("center", dir+"html2");
+        model.addAttribute("center", dir+"get");
         return "index";
     }
 }

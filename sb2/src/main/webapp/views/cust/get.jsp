@@ -8,16 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
-    let html3 = {
+    let get = {
         init: function () {
         }
     };
     $(function () {
-        html3.init();
+        get.init();
     });
 </script>
 <div class="container">
-    <h1>html3</h1>
+    <h1>Cust Get</h1>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -27,9 +27,19 @@
         </tr>
         </thead>
         <tbody>
+<%--   단일 객체만 받을 때    --%>
+<%--        <c:set var="c" value="${custOne}" />--%>
+
+<%--        <tr>--%>
+<%--            <td>${c.id}</td>--%>
+<%--            <td>${c.pwd}</td>--%>
+<%--            <td>${c.name}</td>--%>
+<%--        </tr>--%>
+
+<%--   여러 객체 받을 때    --%>
         <c:forEach var="c" items="${custs}">
             <tr>
-                <td><a href="<c:url value="/html/get" />?id=${c.id}">${c.id}</a></td>
+                <td><a href="<c:url value="/cust/detail" />?id=${c.id}">${c.id}</a></td>
                 <td>${c.pwd}</td>
                 <td>${c.name}</td>
             </tr>
