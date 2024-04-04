@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Random;
+
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -21,6 +23,9 @@ public class MainController {
 
     @RequestMapping("/")
     public String main(){
+        Random r = new Random();
+        int num = r.nextInt(100)+1;
+        log.info(num+"");
         return "index";
     }
 
@@ -40,32 +45,23 @@ public class MainController {
     public String loginimpl(Model model,
                             @RequestParam("id") String id,
                             @RequestParam("pwd") String pwd, HttpSession httpSession){
-
         CustDto custDto = null;
         try {
             custDto = custService.get(id);
-            if(custDto == null){ // 이 사람이 로그인 했는데 해당id가 db에 없는 경우
+            if(custDto == null){
                 throw new Exception();
             }
-            if(!custDto.getPwd().equals(pwd)){ // id는 찾았는데 패스워드가 같지 않으면
+            if(!custDto.getPwd().equals(pwd)){
                 throw new Exception();
             }
             httpSession.setAttribute("id", id);
+            Random r = new Random();
+            int num = r.nextInt(100)+1;
+            log.info(num+"");
         } catch (Exception e) {
+            model.addAttribute("center","loginfail");
             //throw new RuntimeException(e);
-            model.addAttribute("center","loginfail"); // 로그인 실패하면 loginfail파일로
         }
-
-
-//        if(id.equals("qqq") && pwd.equals("111")){
-//            //httpSession.setMaxInactiveInterval(80000);
-//            log.info(id);
-//            httpSession.setAttribute("id", id);
-//        }else{
-//            model.addAttribute("center","loginfail");
-//        }
-
-
         return "index";
     }
 

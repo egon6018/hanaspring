@@ -37,5 +37,5 @@ logging:
 
 app:
   dir:
-    imgdir: file:C:/project/imgs/   #file:///C:\hanaspring\sb2\imgs
+    imgdir: file:C:/project/imgs/ # => /root/project/imgs 형태로 돌아가게 됨
     logdir: file:C:/project/logs/   #file:///C:\hanaspring\sb2\logs
