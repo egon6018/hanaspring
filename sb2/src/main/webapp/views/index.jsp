@@ -34,6 +34,11 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
+    <%-- Web Socket Lib    --%>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+
+
     <script src="<c:url value="/js/0327.js" />"></script>
     <style>
         .fakeimg {
@@ -45,7 +50,8 @@
 <body>
 
 <div class="jumbotron text-center" style="margin-bottom:0">
-    <h1>HTML5 & JavaScript</h1>
+    <h1><spring:message code="site.title" arguments="aa,aa" /></h1>
+    <h5><spring:message code="site.phone" /></h5>
 </div>
 <c:choose> <%-- if-else문 --%>
     <c:when test="${id == null}"> <%-- 로그인 안됐을때 --%>
@@ -70,6 +76,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value="/logout" />">LOGOUT</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/chat" />">chat</a>
             </li>
         </ul>
     </c:otherwise>
@@ -103,7 +112,7 @@
                     <a class="nav-link" href="<c:url value="/cust/" />">Cust</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Item</a>
+                    <a class="nav-link" href="<c:url value="/item/" />">Item</a>
                 </li>
             </c:if>
         </ul>

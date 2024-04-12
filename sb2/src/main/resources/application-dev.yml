@@ -17,8 +17,8 @@ spring:
 #    password: 111111
 
     url: jdbc:log4jdbc:mysql://127.0.0.1:3306/shopdb?characterEncoding=utf8
-    username: user02
-    password: 12200744
+    username: ENC(fGDkN9zsnxbvd8l3MAtPMQ==)  #user02
+    password: ENC(y7V5UQV2wzPVzCxygXv245ic9ES3JEM6)   #12200744
 
     #    driver-class-name: com.mysql.cj.jdbc.Driver
     #    url: jdbc:mysql://127.0.0.1:3306/shopdb?characterEncoding=utf8&serverTimezone=Asia/Seoul
@@ -36,6 +36,10 @@ logging:
 
 
 app:
+  url:
+    #serverurl: http://172.16.20.113:81 # chat에는 이 url로 접속될 것이다
+    serverurl: http://172.16.21.91:81
   dir:
-    imgdir: file:C:/project/imgs/   #file:///C:\hanaspring\sb2\imgs
+    imgdir: file:C:/project/imgs/   #file:///C:\hanaspring\sb2\imgs  #리눅스 -> file:/root/users/project/imgs/
     logdir: file:C:/project/logs/   #file:///C:\hanaspring\sb2\logs
+  wkey:

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!-- JSTL  -->
+<!-- JSTL -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -16,26 +16,55 @@
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="<c:url value="/vendor/fontawesome-free/css/all.min.css" />" rel="stylesheet" type="text/css">
-<%--    <link href="<c:url value="/vendor/fontawesome-free/css/all.min.css"/>" rel="stylesheet" type="text/css">--%>
+    <link href="<c:url value="/vendor/fontawesome-free/css/all.min.css"/>" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="<c:url value="/css/sb-admin-2.min.css"/>" rel="stylesheet">
-<%--    <link href="<c:url value="/css/sb-admin-2.min.css"/>" rel="stylesheet">--%>
 
+    <!-- Custom styles for this page -->
+    <link href="<c:url value="/vendor/datatables/dataTables.bootstrap4.min.css"/>" rel="stylesheet">
 
     <!-- Bootstrap core JavaScript-->
     <script src="<c:url value="/vendor/jquery/jquery.min.js"/>"></script>
     <script src="<c:url value="/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
+
+    <%-- Web Socket Lib    --%>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="<c:url value="/vendor/jquery-easing/jquery.easing.min.js"/>"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="<c:url value="/js/sb-admin-2.min.js"/>"></script>
+    <!-- HighCharts  -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <script>
+        let index = {
+            init:function(){
+                $('#login_form > button').click(()=>{
+                    // let id = $('#id').val();
+                    // let pwd = $('#id').val();
+                    $('#login_form').attr({
+                        'action':'<c:url value="/loginimpl"/>',
+                        'method':'POST'
+                    });
+                    $('#login_form').submit();
+                });
+            }
+        };
+        $(function(){
+            index.init();
+        });
+    </script>
 
 </head>
 
@@ -48,7 +77,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<c:url value="/index.html"/>">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -58,12 +87,14 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="<c:url value="/index.html"/>">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Home</span></a>
-            </li>
+            <c:if test="${sessionScope.admin != null}">
+                <!-- Web Socket -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="<c:url value="/websocket" />">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Web Socket</span></a>
+                </li>
+            </c:if>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -72,54 +103,53 @@
             <div class="sidebar-heading">
                 Interface
             </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Cust</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Customer Management:</h6>
-                        <a class="collapse-item" href="<c:url value="/buttons.html"/>">Add</a>
-                        <a class="collapse-item" href="<c:url value="/cust/get"/>">Get</a>
+            <c:if test="${sessionScope.admin.role.roleId == 1 || sessionScope.admin.role.roleId == 2}">
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Cust</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Customer Management:</h6>
+                            <a class="collapse-item" href="<c:url value="/cust/add"/>">Add</a>
+                            <a class="collapse-item" href="<c:url value="/cust/get"/>">Get</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Item</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Item Management:</h6>
-                        <a class="collapse-item" href="<c:url value="/utilities-color.html"/>">Add</a>
-                        <a class="collapse-item" href="<c:url value="/utilities-border.html"/>">GET</a>
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                       aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Item</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Item Management:</h6>
+                            <a class="collapse-item" href="<c:url value="/item/add"/>">Add</a>
+                            <a class="collapse-item" href="<c:url value="/item/get"/>">Get</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            </c:if>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
+
+
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-            </div>
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -246,8 +276,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="<c:url value="/img/undraw_profile_1.svg"/>"                                            alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -258,8 +287,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="<c:url value="/img/undraw_profile_2.svg"/>"                                            alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
@@ -270,8 +298,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="<c:url value="/img/undraw_profile_3.svg"/>"                                            alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
@@ -299,42 +326,32 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <c:choose>
-                            <c:when test="${id == null}">
+                            <c:when test="${sessionScope.admin == null}">
                                 <a href="#" data-toggle="modal" data-target="#loginModal">login</a>
                             </c:when>
                             <c:otherwise>
-                                <!-- Nav Item - User Information -->
                                 <li class="nav-item dropdown no-arrow">
-                                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.admin.id}</span>
                                         <img class="img-profile rounded-circle"
                                              src="<c:url value="/img/undraw_profile.svg"/>">
+
+
                                     </a>
                                     <!-- Dropdown - User Information -->
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                         aria-labelledby="userDropdown">
-                                        <a class="dropdown-item" href="#">
-                                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            Profile
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            Settings
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            Activity Log
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            Logout
-                                        </a>
-                                    </div>
+                                </li>
+                                <li class="nav-item dropdown no-arrow">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.admin.role.roleName}</span>
+                                </li>
+                                <li class="nav-item dropdown no-arrow">
+                                    <a href="<c:url value="/logout"/>" role="button"
+                                       aria-haspopup="true" aria-expanded="false">LOGOUT</a>
                                 </li>
                             </c:otherwise>
                         </c:choose>
+                        <!-- Nav Item - User Information -->
+
 
                     </ul>
 
@@ -378,7 +395,7 @@
 
     <!-- Login Modal-->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
-        aria-hidden="true">
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -392,11 +409,14 @@
                         <div class="form-group">
                             <label for="id">ID:</label>
                             <input type="text" class="form-control" id="id" placeholder="Enter id" name="id">
+
                         </div>
                         <div class="form-group">
                             <label for="pwd">Password:</label>
                             <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+
                         </div>
+
                         <button type="button" class="btn btn-primary">LOGIN</button>
                     </form>
                 </div>
@@ -409,7 +429,7 @@
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -421,12 +441,11 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="<c:url value="/login.html"/>">Logout</a>
+                    <a class="btn btn-primary" href="login.html">Lgout</a>
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- Page level plugins -->
     <script src="<c:url value="/vendor/chart.js/Chart.min.js"/>"></script>
@@ -435,17 +454,12 @@
     <script src="<c:url value="/js/demo/chart-area-demo.js"/>"></script>
     <script src="<c:url value="/js/demo/chart-pie-demo.js"/>"></script>
 
-<%-- 아래는 table   --%>
-    <!-- Custom styles for this page -->
-    <link href="<c:url value="/vendor/datatables/dataTables.bootstrap4.min.css"/>" rel="stylesheet">
 
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
+    <script src="<c:url value="/vendor/datatables/jquery.dataTables.min.js"/>"></script>
+    <script src="<c:url value="/vendor/datatables/dataTables.bootstrap4.min.js"/>"></script>
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
-
+    <script src="<c:url value="/js/demo/datatables-demo.js"/>"></script>
 </body>
 
 </html>

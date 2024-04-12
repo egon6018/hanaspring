@@ -1,10 +1,8 @@
 package com.hana.app.service;
 
 import com.hana.app.data.dto.AddrDto;
-import com.hana.app.data.dto.CustDto;
 import com.hana.app.frame.HanaService;
 import com.hana.app.repository.AddrRepository;
-import com.hana.app.repository.CustRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -40,4 +38,9 @@ public class AddrService implements HanaService<Integer, AddrDto> {
     public List<AddrDto> get() throws Exception {
         return addrRepository.select();
     }
+
+    public List<AddrDto> findByCustId(String id) throws Exception{
+        return addrRepository.findByCustId(id);
+    }
+
 }
