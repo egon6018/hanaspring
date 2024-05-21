@@ -20,8 +20,9 @@ class InsertTests {
     CommentService commentService;
     @Test
     void contextLoads() {
-        CommentDto commentDto = CommentDto.builder()
-                .custId("id03").commentContent("댓글3").boardId(3).build();
+        CommentDto commentDto = CommentDto.builder().
+                custId("id04").commentContent("댓글3").
+                boardId(5).build();
         try {
             commentService.add(commentDto);
             log.info("----------OK----------------");

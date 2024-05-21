@@ -13,15 +13,14 @@ import java.util.List;
 public class CommentService implements HanaService<Integer, CommentDto> {
 
     private final CommentRepository commentRepository;
-
     @Override
     public int add(CommentDto commentDto) throws Exception {
-        return commentRepository.insert(commentDto); // 추가건수가 있으면 1을 리턴, 없으면 0을 리턴
+        return commentRepository.insert(commentDto);
     }
 
     @Override
     public int del(Integer integer) throws Exception {
-        return commentRepository.delete(integer); // 삭제건수가 있으면 1을 리턴, 없으면 0을 리턴
+        return commentRepository.delete(integer);
     }
 
     @Override

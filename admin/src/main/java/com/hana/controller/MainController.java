@@ -24,6 +24,7 @@ public class MainController {
     @RequestMapping("/")
     public String main(Model model){
         model.addAttribute("charturl",serverUrl); // 라이브차트를 위해
+        model.addAttribute("serverurl",serverUrl);
         return "index";
     }
 

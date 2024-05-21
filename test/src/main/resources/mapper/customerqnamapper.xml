@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hana.app.repository.CustomerQnaRepository">
+
+    <select id="selectOne" parameterType="Integer" resultType="CustomerQnaDto">
+        SELECT * FROM company_qna WHERE qna_idx=#{qnaIdx}
+    </select>
+    <select id="select" resultType="CustomerQnaDto">
+        SELECT * FROM company_qna
+    </select>
+
+    <select id="findQna" parameterType="String" resultType="CustomerQnaDto">
+        SELECT * FROM company_qna WHERE qna_pw=#{param1}
+    </select>
+
+    <select id="searchContent" parameterType="String" resultType="CustomerQnaDto">
+        SELECT * FROM company_qna WHERE LOWER(qna_content) LIKE CONCAT('%', #{param1}, '%')
+    </select>
+    <select id="searchTitle" parameterType="String" resultType="CustomerQnaDto">
+        SELECT * FROM company_qna WHERE LOWER(qna_title) LIKE CONCAT('%', #{param1}, '%')
+    </select>
+
+    <insert id="insert" parameterType="CustomerQnaDto">
+        INSERT INTO company_qna VALUES (0, #{qnaName},#{qnaPw},#{qnaTitle},#{qnaContent}, now())
+    </insert>
+    <update id="update" parameterType="CustomerQnaDto">
+        UPDATE company_qna SET qna_name=#{qnaName}, qna_pw=#{qnaPhone},
+                               qna_title=#{qnaTitle}, qna_content=#{qnaContent} WHERE qna_idx=#{qnaIdx}
+    </update>
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM company_qna WHERE qna_idx=#{one2oneIdx}
+    </delete>
+
+</mapper>

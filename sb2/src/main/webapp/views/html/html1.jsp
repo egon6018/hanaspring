@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: goeun
+  User: User
   Date: 2024-03-27
   Time: 오전 9:37
   To change this template use File | Settings | File Templates.
@@ -12,9 +12,7 @@
         color:red;
     }
 </style>
-
 <script>
-    // jquery시작 $ (주어).ready(함수)
     $(document).ready(function(){
         $('#ptag').text('Replace Text');
         $('h5').click(function(){
@@ -22,13 +20,14 @@
             $(this).text('Click Event');
         });
     });
-
-    // window.onload = function (){
-    //     document.getElementById("ptag").innerHTML = 'Replace Text';
-    //     document.querySelector('h5').addEventListener(onclick(function(){
-    //         this.innerHTML = 'Click Event';
-    //     }));
+    // window.onload = function(){
+    //     // document.getElementById("ptag").innerHTML = 'Replace Text';
+    //     // document.querySelector('h5').addEventListener(onclick(function(){
+    //     //     alert('OK');
+    //     // }));
+    //
     // };
+
 </script>
 
 <div class="container">

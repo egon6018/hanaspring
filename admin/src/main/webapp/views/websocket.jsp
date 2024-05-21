@@ -37,7 +37,7 @@
                 this.disconnect();
             });
             $('#sendall').click(()=>{
-                let msg = JSON.stringify({
+                let msg = JSON.stringify({ // 객체 -> JSON : stringify // JSON -> 객체 : parse
                     'sendid' : this.id,
                     'content1' : $("#alltext").val()
                 });

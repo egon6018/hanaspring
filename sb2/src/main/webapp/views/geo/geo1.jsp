@@ -1,15 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: goeun
-  Date: 2024-03-27
-  Time: 오전 9:37
-  To change this template use File | Settings | File Templates.
---%>
 <style>
     #geo1 > #map{
         width:500px;
-        height:600px;
+        height: 400px;
         border:2px solid red;
     }
 </style>
@@ -79,10 +72,8 @@
         geo1.init();
     });
 </script>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container" id="geo1">
     <h2>GEO1 Page</h2>
     <div id="map"></div>
-
 </div>

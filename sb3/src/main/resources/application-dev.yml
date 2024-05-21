@@ -1,0 +1,58 @@
+server:
+  port: 88
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+    session:
+      timeout: 10m
+spring:
+  session: # 세션을 레디스에 저장하여 사용하겠다.(기존에는 톰캣에서 세션 관리)
+    redis:
+      namespace: spring:session # spring boot에서 redis를 사용하겠다
+    store-type: redis
+  data:
+    redis:
+    host: localhost # 다른 ip로도 접속 가능
+    port: 6379
+    password: aaaa
+  mvc:
+    view:
+      prefix: /views/
+      suffix: .jsp
+  datasource:
+    driver-class-name:  net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+
+#    url: jdbc:log4jdbc:mysql://172.16.21.91:3306/shopdb?characterEncoding=utf8
+#    username: user01
+#    password: 111111
+
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/shopdb?characterEncoding=utf8
+    username: ENC(fGDkN9zsnxbvd8l3MAtPMQ==)  #user02
+    password: ENC(y7V5UQV2wzPVzCxygXv245ic9ES3JEM6)   #12200744
+
+    #    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    url: jdbc:mysql://127.0.0.1:3306/shopdb?characterEncoding=utf8&serverTimezone=Asia/Seoul
+
+
+
+mybatis:
+  type-aliases-package: com.hana.app.data.dto
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    root: info
+
+
+app:
+  url:
+    serverurl: http://172.16.20.113:81 # chat에는 이 url로 접속될 것이다
+    #serverurl: http://172.16.21.91:81
+  dir:
+    imgdir: file:C:/project/imgs/   #file:///C:\hanaspring\sb2\imgs  #리눅스 -> file:/root/users/project/imgs/
+    logdir: file:C:/project/logs/   #file:///C:\hanaspring\sb2\logs
+  key:
+    wkey: C2YXvxKurZ%2FmXrbnFlyub5B89GCCWUmYncj4wvNqlWzyP0IwmeP%2FAVl1mU3Tz7Kzk8mfT3f6Wm2wJJ9Z6yNjgw%3D%3D
+    whkey: ENC(HE6zJ0DpDGhlGZSvdc1aN++IWaW5YHRz6qdK3xPBPtUJU/vJUQEnExcV8MnXJ7um)

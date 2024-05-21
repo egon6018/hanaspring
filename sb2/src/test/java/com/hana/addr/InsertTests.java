@@ -20,7 +20,7 @@ class InsertTests {
     AddrService addrService;
     @Test
     void contextLoads() {
-        AddrDto addrDto = AddrDto.builder().addrName("우리집3").addrDetail("서울").custId("id75").build();
+        AddrDto addrDto = AddrDto.builder().addrName("우리집3").addrDetail("서울1").custId("id03").build();
         try {
             addrService.add(addrDto);
             log.info("----------OK----------------");

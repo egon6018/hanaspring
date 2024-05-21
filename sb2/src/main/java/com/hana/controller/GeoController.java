@@ -6,42 +6,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/geo") // 절대경로를 /html로 붙이기
+@RequestMapping("/geo")
 public class GeoController {
-    String dir="geo/";
+    String dir= "geo/";
     @RequestMapping("/")
     public String main(Model model){
         model.addAttribute("left", dir+"left");
-        model.addAttribute("center", dir+"center");
+        model.addAttribute("center",dir+"center");
         return "index";
     }
-
     @RequestMapping("/geo1")
     public String geo1(Model model){
         model.addAttribute("left", dir+"left");
-        model.addAttribute("center", dir+"geo1");
+        model.addAttribute("center",dir+"geo1");
         return "index";
     }
-
     @RequestMapping("/geo2")
     public String geo2(Model model){
         model.addAttribute("left", dir+"left");
-        model.addAttribute("center", dir+"geo2");
+        model.addAttribute("center",dir+"geo2");
         return "index";
     }
-
     @RequestMapping("/geo3")
     public String geo3(Model model){
         model.addAttribute("left", dir+"left");
-        model.addAttribute("center", dir+"geo3");
+        model.addAttribute("center",dir+"geo3");
         return "index";
     }
-
     @RequestMapping("/shopdetail")
-    public String shopdetail(Model model, @RequestParam("shopid") int shopid){
+    public String shopdetail(Model model,
+                             @RequestParam("shopid") int shopid){
         model.addAttribute("shopid", shopid);
-        model.addAttribute("left", dir+"left");
-        model.addAttribute("center", dir+"detail");
+        model.addAttribute("left",dir+"left");
+        model.addAttribute("center",dir+"detail");
         return "index";
+
     }
 }

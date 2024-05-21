@@ -14,14 +14,8 @@ import java.time.LocalDateTime;
 public class CommentDto {
     private int commentId;
     private String custId;
-    private String boardTitle;
     private String commentContent;
     private LocalDateTime commentRegdate;
     private LocalDateTime commentUpdate;
     private int boardId;
 }
-
-
-
-
-

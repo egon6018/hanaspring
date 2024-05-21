@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.xml.stream.events.Comment;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,7 +22,7 @@ public class BoardDto {
     private LocalDateTime boardRegdate;
     private LocalDateTime boardUpdate;
     private int boardCnt;
-    // 조회 시 comment 개수 확인
+    // 조회시 comment 개수 확인
     private int commentCnt;
     private List<CommentDto> commentList;
 }

@@ -1,0 +1,4 @@
+spring:
+  profiles:
+    active: dev # dev파일을 실행시킬것이다
+            # pro -> pro파일을 실행할 것임

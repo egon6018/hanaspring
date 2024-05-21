@@ -4,8 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hana.app.repository.AddrRepository">
 
+    <select id="findByCustId" parameterType="String" resultType="addrDto">
+        SELECT * FROM db_addr WHERE cust_id=#{id}
+    </select>
     <select id="selectOne" parameterType="Integer" resultType="addrDto">
-        SELECT * FROM db_addr WHERE addr_id=#{id}
+        SELECT * FROM db_addr WHERE addr_id=#{k}
     </select>
     <select id="select" resultType="addrDto">
         SELECT * FROM db_addr

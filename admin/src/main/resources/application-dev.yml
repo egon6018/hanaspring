@@ -32,6 +32,7 @@ app:
     uploadimgdir: C:/project/imgs/    # 파일 Write 용
     logdir: file:///C:/project/logs/
   url:
-    server-url: http://172.16.20.113:81
+    server-url: http://192.168.159.125:81
+    #http://172.16.20.113:81
 
     #    file:/root/users/project/imgs/

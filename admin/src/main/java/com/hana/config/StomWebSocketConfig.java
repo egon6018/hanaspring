@@ -14,7 +14,8 @@ public class StomWebSocketConfig implements WebSocketMessageBrokerConfigurer{
     public void registerStompEndpoints(StompEndpointRegistry registry) {
 //        registry.addEndpoint("/ws").setAllowedOrigins("http://127.0.0.1").withSockJS();
 //        registry.addEndpoint("/ws").setAllowedOrigins("http://172.16.20.113").withSockJS();
-        registry.addEndpoint("/ws").setAllowedOriginPatterns("*").withSockJS(); // ws채널로 들어오는 것들만 열어둔다
+        registry.addEndpoint("/ws").setAllowedOriginPatterns("*").withSockJS(); // ws채널로는 모두가 들어올 수 있음
+        registry.addEndpoint("/wss").setAllowedOrigins("http://172.16.20.113").withSockJS(); // wss채널에는 나의 ip만 들어올 수 있음
 
 //        registry.addEndpoint("/chbot").setAllowedOrigins("http://127.0.0.1").withSockJS();
 //        registry.addEndpoint("/wss").setAllowedOrigins("http://127.0.0.1").withSockJS();
@@ -23,7 +24,8 @@ public class StomWebSocketConfig implements WebSocketMessageBrokerConfigurer{
     /* 어플리케이션 내부에서 사용할 path를 지정할 수 있음 */
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/send","/broadcast"); // broadcast로 나간다는 뜻
+        //registry.enableSimpleBroker("/send","/broadcast"); // broadcast로 나간다는 뜻
+        registry.enableSimpleBroker("/send","/send2");
     }
 }
 

@@ -30,21 +30,22 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="i" items="${items}">
-            <tr>
-                <td><img  src="<c:url value="/imgs"/>/${i.imgName}"></td>
-                <td><a href="<c:url value="/item/detail"/>?id=${i.itemId}">${i.itemId}</a></td>
-                <td>${i.itemName}</td>
-                <td>
-                    <fmt:formatNumber type="number" pattern="###,###원" value="${i.itemPrice}" />
-                </td>
-                <td>${i.regDate}</td>
-                <td>${i.updateDate}</td>
-            </tr>
-        </c:forEach>
+            <c:forEach var="i" items="${items}">
+                 <tr>
+                     <td><img  src="<c:url value="/imgs"/>/${i.imgName}"></td>
+                     <td><a href="<c:url value="/item/detail"/>?id=${i.itemId}">${i.itemId}</a></td>
+                     <td>${i.itemName}</td>
+                     <td>
+                         <fmt:formatNumber type="number" pattern="###,###원" value="${i.itemPrice}" />
+                     </td>
+                     <td>${i.regDate}</td>
+                     <td>${i.updateDate}</td>
+                 </tr>
+            </c:forEach>
         </tbody>
     </table>
 </div>
+
 
 
 

@@ -5,34 +5,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/ajax") // 절대경로를 /html로 붙이기
+@RequestMapping("/ajax")
 public class AjaxController {
-    String dir="ajax/";
+    String dir= "ajax/";
     @RequestMapping("/")
     public String main(Model model){
         model.addAttribute("left", dir+"left");
-        model.addAttribute("center", dir+"center");
+        model.addAttribute("center",dir+"center");
         return "index";
     }
-
     @RequestMapping("/ajax1")
-    public String html1(Model model){
+    public String ajax1(Model model){
         model.addAttribute("left", dir+"left");
-        model.addAttribute("center", dir+"ajax1");
+        model.addAttribute("center",dir+"ajax1");
         return "index";
     }
-
     @RequestMapping("/ajax2")
-    public String html2(Model model){
+    public String ajax2(Model model){
         model.addAttribute("left", dir+"left");
-        model.addAttribute("center", dir+"ajax2");
+        model.addAttribute("center",dir+"ajax2");
         return "index";
     }
-
     @RequestMapping("/ajax3")
-    public String html3(Model model){
+    public String ajax3(Model model){
         model.addAttribute("left", dir+"left");
-        model.addAttribute("center", dir+"ajax3");
+        model.addAttribute("center",dir+"ajax3");
         return "index";
     }
 }

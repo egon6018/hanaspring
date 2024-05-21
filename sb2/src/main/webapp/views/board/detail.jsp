@@ -72,10 +72,10 @@
 
     <%-- Comment List    --%>
 
-    <c:choose>
-        <c:when test="${board.commentList.size() != 0}">
-            <%--            <c:when test="${board.commentList != []}">--%>
-            <%--            <c:when test="${!empty(board.commentList)}">--%>
+        <c:choose>
+            <c:when test="${board.commentList.size() != 0}">
+<%--            <c:when test="${board.commentList != []}">--%>
+<%--            <c:when test="${!empty(board.commentList)}">--%>
             <table class="table table-striped" id="comment_table">
                 <thead>
                 <tr>
@@ -98,11 +98,11 @@
                 </c:forEach>
                 </tbody>
             </table>
-        </c:when>
-        <c:otherwise>
-            <p>없음</p>
-        </c:otherwise>
-    </c:choose>
+            </c:when>
+            <c:otherwise>
+                <p>없음</p>
+            </c:otherwise>
+        </c:choose>
 
 
 

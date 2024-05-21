@@ -20,29 +20,17 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="c" items="${cpage.getList()}">
-            <tr>
-                <td><a href="<c:url value="/cust/detail"/>?id=${c.id}">${c.id}</a></td>
-                <td>${c.pwd}</td>
-                <td>${c.name}</td>
-            </tr>
-        </c:forEach>
+            <c:forEach var="c" items="${cpage.getList()}">
+                 <tr>
+                     <td><a href="<c:url value="/cust/detail"/>?id=${c.id}">${c.id}</a></td>
+                     <td>${c.pwd}</td>
+                     <td>${c.name}</td>
+                 </tr>
+            </c:forEach>
         </tbody>
     </table>
     <jsp:include page="../page.jsp"/>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
